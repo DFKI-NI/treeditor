@@ -22,24 +22,16 @@ export class ApiService implements ApiServiceInterface {
   constructor(private http: HttpClient) {}
 
   getAllTreeKinds(): Observable<TreeKind[]> {
-    return this.http.get<TreeKind[]>(this.baseUrl + '/tree/kind/all', {
-      headers: this.httpHeaders,
-    });
+    return this.http.get<TreeKind[]>(this.baseUrl + '/tree/kind/all', );
   }
   getAllTrees(): Observable<TreeShort[]> {
-    return this.http.get<TreeShort[]>(this.baseUrl + '/tree/all', {
-      headers: this.httpHeaders,
-    });
+    return this.http.get<TreeShort[]>(this.baseUrl + '/tree/all', );
   }
   getTree(): Observable<TreeDisplay> {
-    return this.http.get<TreeDisplay>(this.baseUrl + '/tree/latest', {
-      headers: this.httpHeaders,
-    });
+    return this.http.get<TreeDisplay>(this.baseUrl + '/tree/latest', );
   }
   getTreeById(id: number): Observable<TreeDisplay> {
-    return this.http.get<TreeDisplay>(this.baseUrl + '/tree/id/' + id, {
-      headers: this.httpHeaders,
-    });
+    return this.http.get<TreeDisplay>(this.baseUrl + '/tree/id/' + id, );
   }
 
   postTree(tree: TreeOut, isMajor: boolean): Observable<TreeShort> {
@@ -55,6 +47,9 @@ export class ApiService implements ApiServiceInterface {
     return this.http.post<TreeShort>(
       this.baseUrl + '/tree/new/' + tree.kind_of_tree,
       body,
+      {
+        headers: this.httpHeaders,
+      }
     );
   }
 
@@ -64,24 +59,24 @@ export class ApiService implements ApiServiceInterface {
       description: description,
     });
     console.log(body);
-    return this.http.post<TreeKind>(this.baseUrl + '/tree/kind/new', body);
+    return this.http.post<TreeKind>(this.baseUrl + '/tree/kind/new', body,{
+      headers: this.httpHeaders,
+    });
   }
 
   createNewDataTyp(dataType: WorkingDataType): Observable<DataType> {
     const body = JSON.stringify(dataType);
     console.log(body);
-    return this.http.post<DataType>(this.baseUrl + '/core/datatype/new', body);
+    return this.http.post<DataType>(this.baseUrl + '/core/datatype/new', body,{
+      headers: this.httpHeaders,
+    });
   }
 
   getDataTypes(): Observable<DataType[]> {
-    return this.http.get<DataType[]>(this.baseUrl + '/core/datatype/all', {
-      headers: this.httpHeaders,
-    });
+    return this.http.get<DataType[]>(this.baseUrl + '/core/datatype/all', );
   }
 
   getColors(): Observable<Color[]> {
-    return this.http.get<Color[]>(this.baseUrl + '/tree/colors', {
-      headers: this.httpHeaders,
-    });
+    return this.http.get<Color[]>(this.baseUrl + '/tree/colors', );
   }
 }
